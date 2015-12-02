@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Platz</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to 'PLATZ', root_path, class: 'navbar-brand' %>
+      </div>
+      <div class="collapse navbar-collapse" id="main-nav-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to 'About', about_path %></li>
+          <li><%= link_to 'Menu', menu_path %></li>
+          <li><%= link_to 'Beans', beans_path %></li>
+          <li><%= link_to 'Blog', blog_path %></li>
+            <% if user_signed_in? %>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <%= image_tag(current_user.image, size: '20x20', style:'border-radius:3px;vertical-align:top;') if current_user.image %>
+                  <%= current_user.name %>
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to edit_user_registration_path do %>
+                    <i class="fa fa-edit"></i>
+                    My Profile
+                    <% end %>
+                  </li>
+                  <li><%= link_to destroy_user_session_path, method: :delete, data: { confirm: "Are you sure?" } do %>
+                    <i class="fa fa-power-off"></i>
+                    Logout
+                    <% end %>
+                  </li>
+                </ul>
+              </li>
+            <% else %>  
+            <li>
+              <%= link_to new_user_session_path, method: :get do %>
+                <i class="fa fa-user"></i>
+                Login
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+  </nav>
+
+  <div class="container">
+    <%= yield %>
+  </div>
+
+</body>
+</html>
