@@ -47,3 +47,5 @@ gem 'bcrypt'
   group :development do
     gem 'pry'
   end
+  
+  gem 'byebug'
