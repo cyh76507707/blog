@@ -10,3 +10,16 @@ moderator = Moderator.create(
     username: "cyh7070@naver.com",
     password: "1111"
 )
+
+30.times do
+    post = Post.create(
+        title: Faker::Lorem.sentence(20),
+        content: Faker::Lorem.paragraph,
+        publish: true,
+        moderator: moderator
+    )
+    
+    tag = Tag.create(name: Faker::Lorem.word)
+    
+    post_tag = PostTag.create(post: post, tag: tag)
+end

@@ -47,5 +47,12 @@ gem 'bcrypt'
   group :development do
     gem 'pry'
   end
+
+# Use paginator
+  gem 'kaminari', '~> 0.16.3'
   
-  gem 'byebug'
+  group :development, :test do
+    gem 'byebug'
+    gem 'faker'
+  end
+  

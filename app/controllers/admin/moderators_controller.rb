@@ -1,4 +1,4 @@
-class Admin::ModeratorsController < ApplicationController
+class Admin::ModeratorsController < Admin::ApplicationController
     def index
         @moderators = Moderator.all
     end
@@ -11,8 +11,10 @@ class Admin::ModeratorsController < ApplicationController
         @moderator = Moderator.find(params[:id])
         
         if @moderator.update(moderator_params)
-            redirect_to :back
+            flash[:notice] = "Moderator was successfully updated"
+            redirect_to admin_moderators_url
         else
+            flash[:alert] = "There was a problem updating moderator"
             render 'edit'
         end
         
